@@ -1,3 +1,10 @@
+"""
+    Project 1.2
+    Author: Natalio Gomes
+    Class: COMP390
+    Section: 002
+    Date: December 3rd, 2023
+"""
 from ColoredText import TerminalColors
 def print_welcome_message():
     """
@@ -46,3 +53,10 @@ def print_filter_menu_options():
 def terminate_the_program() -> exit:
     print(TerminalColors.RESET + "\nThe program is now exiting... GOODBYE!\n" + TerminalColors.RESET)
     exit()
+
+def print_the_output_option():
+    print("How would you like to output the filter results?")
+    print("1. On Screen (in terminal)")
+    print("2. To a TEXT file")
+    print("3. To an EXCEL file")
+    print("4. QUIT")

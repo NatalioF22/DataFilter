@@ -1,11 +1,49 @@
+"""
+    Project 1.2
+    Author: Natalio Gomes
+    Class: COMP390
+    Section: 002
+    Date: December 3rd, 2023
+
+
+    File Handler File
+
+    This module provides utility functions for file handling, including file opening modes, 
+    file name validation, and user prompts.
+"""
+
 from ColoredText import TerminalColors
 import os
 from CustumDecorators import *
 from meteorite_console_display import *
+import datetime
 
+
+def output_text_file_name():
+    """
+    This method generates a formatted date string for use in creating output text file names.
+
+    Returns:
+        str: Formatted date string.
+    """
+    current_datetime = datetime.datetime.now()
+    replacements = [',', ':', " ", "."]
+    formatted_date_string = str(current_datetime)
+    for replacement in replacements:
+        formatted_date_string = formatted_date_string.replace(replacement, "_")
+    return formatted_date_string
 
 
 def check_if_file_exists(file_name:str) -> bool:
+    """
+    Check if the specified file exists.
+
+    Args:
+        file_name (str): The name of the file.
+
+    Returns:
+        bool: True if the file exists, False otherwise.
+    """
     if os.path.exists(file_name): 
         print(TerminalColors.GREEN + f"\nTarget file: {file_name}\n" + TerminalColors.RESET)
         return True
@@ -14,7 +52,13 @@ def check_if_file_exists(file_name:str) -> bool:
     
 
 @keyboard_interrupt_handler
-def prompt_for_valid_file_name_input():
+def prompt_for_valid_file_name_input()->str:
+    """
+    Prompt the user for a valid file name input.
+
+    Returns:
+        str: Valid file name.
+    """
     print("Enter a valid file name (ex. 'file_name.txt') with its file extension (if applicable) |or| Enter '>q' or '>Q' to quit: "  , end="")
     file_name = input(TerminalColors.GREEN)
     if file_name == ">q" or file_name == ">Q":
@@ -23,24 +67,51 @@ def prompt_for_valid_file_name_input():
         return file_name
 
 
-def get_valid_file_name_loop():
+def get_valid_file_name_loop()->str:
+    """
+    Get a valid file name in a loop until a valid one is provided.
+
+    Returns:
+        str: Valid file name.
+    """
     file_name = None
     while not file_name:
         file_name = prompt_for_valid_file_name_input()
     return file_name
 
 
-def prompt_for_file_name():
+def prompt_for_file_name()->str:
+    """
+    Prompt the user for a file name.
+
+    Returns:
+        str: File name.
+    """
     result = get_valid_file_name_loop()
     return result 
 
 
-def check_valid_mode(user_mode_input):
+def check_valid_mode(user_mode_input)->str:
+    """
+    Check if the specified file mode input is valid.
+
+    Args:
+        user_mode_input (str): User-provided file mode input.
+
+    Returns:
+        str: Valid file mode.
+    """
     if user_mode_input.lower() == '>q':
         terminate_the_program()
     return user_mode_input if user_mode_input.lower() in ['r','w','a','x'] else None
 
-def get_file_mode_input():
+def get_file_mode_input()->str:
+    """
+    Get valid file mode input from the user.
+
+    Returns:
+        str: Valid file mode.
+    """
     input_mode = None
     while not input_mode:
         try:
@@ -53,23 +124,68 @@ def get_file_mode_input():
     return input_mode
 
 
-def open_file_in_read_mode(file_name):
+def open_file_in_read_mode(file_name:str)->object:
+    """
+    Open a file in read mode.
+
+    Args:
+        file_name (str): Name of the file.
+
+    Returns:
+        file: File object.
+    """
     file_obj = open(file_name)
     return file_obj
 
-def open_file_in_write_mode(file_name):
+def open_file_in_write_mode(file_name:str)->object:
+    """
+    Open a file in write mode.
+
+    Args:
+        file_name (str): Name of the file.
+
+    Returns:
+        file: File object.
+    """
     file_obj = open(file_name,'w')
     return file_obj
 
-def open_file_in_append_mode(file_name):
+def open_file_in_append_mode(file_name:str)-> object:
+    """
+    Open a file in append mode.
+
+    Args:
+        file_name (str): Name of the file.
+
+    Returns:
+        file: File object.
+    """
     file_obj = open(file_name,'a')
     return file_obj
     
-def open_file_in_exclusive_mode(file_name):
+def open_file_in_exclusive_mode(file_name:str)->object:
+    """
+    Open a file in exclusive mode.
+
+    Args:
+        file_name (str): Name of the file.
+
+    Returns:
+        file: File object.
+    """
     file_obj = open(file_name,'x')
     return file_obj
 
-def open_file_with_user_mode(file_name):
+def open_file_with_user_mode(file_name:str)->object:
+    """
+    Open a file based on user-provided mode.
+
+    Args:
+        file_name (str): Name of the file.
+
+    Returns:
+        file: File object.
+    """
     mode = get_file_mode_input()
 
     if mode == 'r':
