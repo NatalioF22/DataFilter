@@ -1,0 +1,1 @@
+name_label, id_label, name_type_label, rec_class_label, mass_g_label, fall_label, year_label, rec_lat_label, rec_long_label, geo_location_label, states_label = 'name', 'id', 'nametype', 'recclass', 'mass_g', 'fall', 'year', 'reclat', 'reclong', 'geolocation', 'states'

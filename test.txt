@@ -1,1 +1,109 @@
-scd  avjbjkvbjkvdknbk
+from ColoredText import TerminalColors
+import os
+
+def print_welcome_message():
+    """
+    Print a welcome message for the Meteorite Filtering Application.
+
+    This function prints a welcome message with information about the purpose
+    of the application and the required format for the input text file.
+
+    How to use it:
+        print_welcome_message()
+
+    Author: Natalio Gomes
+    Date: December 2023
+    """
+    print(f"{'*'*100}")
+    print("\n\t\t--- Welcome to the Meteorite Filtering Application --- \n\n"
+          "This program allows you to filter NASA Meteorite data stored in a text file.\n\n"
+          "To use this application, ensure that the data in the text file is organized in the following format:\n"
+          "\t- Each line of the text file should describe a single meteorite.\n"
+          "\t- For each meteorite, there must be 12 tab-separated data points.\n\n"
+          "Please follow the prompts to filter the data.\n\n"
+          "\tAuthor: Natalio Gomes\n"
+          "\tDecember 2023\n")
+
+
+def handle_keyboard_interrupt():
+    
+    print(TerminalColors.CYAN + "\n\nMust exit this program successfully!\n" + TerminalColors.RESET)
+
+
+def wrapped_function(function_name, *args, **kwargs):
+   
+    try:
+        return function_name(*args, **kwargs)
+    except KeyboardInterrupt:
+        handle_keyboard_interrupt()
+
+
+def keyboard_interrupt_handler(function_name):
+   
+    return lambda *args, **kwargs: wrapped_function(function_name, *args, **kwargs)
+
+def terminate_the_program() -> exit:
+    print(TerminalColors.RESET + "\nThe program is now exiting... GOODBYE!\n" + TerminalColors.RESET)
+    exit()
+
+
+def check_if_file_exists(file_name:str) -> bool:
+    if os.path.exists(file_name): 
+        print(TerminalColors.GREEN + f"\nTarget file: {file_name}\n" + TerminalColors.RESET)
+        return True
+    else:
+        print(TerminalColors.RED + f"\nERROR: TARGET FILE NAME: '{file_name}' IS NOT VALID!\n" + TerminalColors.RESET)
+    
+
+@keyboard_interrupt_handler
+def prompt_for_valid_file_name_input():
+    print("Enter a valid file name (ex. 'file_name.txt') with its file extension (if applicable) |or| Enter '>q' or '>Q' to quit: "  , end="")
+    file_name = input(TerminalColors.GREEN)
+    if file_name == ">q" or file_name == ">Q":
+        terminate_the_program()
+    elif check_if_file_exists(file_name):
+        return file_name
+
+
+def get_valid_file_name_loop():
+    file_name = None
+
+    while not file_name:
+        file_name = prompt_for_valid_file_name_input()
+    return file_name
+
+def prompt_for_file_name():
+    result = get_valid_file_name_loop()
+    return result 
+
+def print_file_opening_modes():
+    """
+    Print available file opening modes with a warning about 'w' mode.
+
+    Provides information about various file opening modes and warns about potential data loss
+    when using 'w' mode.
+
+    Usage:
+        print_file_opening_modes()
+    """
+    print(
+        """
+    What mode would you like to open the file with?
+    "r" - open for reading (default)
+    "w" - open for writing, truncating the file first.
+         (WARNING: this mode will delete the contents of an existing file!)
+    "x" - open for exclusive creation, failing if the file already exists
+    "a" - open for writing, appending to the end of the file if it exists
+    Enter ">q" or ">0" to quit """
+    )
+    
+
+
+
+def main():
+    print_welcome_message()
+    prompt_for_file_name()
+    print_file_opening_modes()
+
+if __name__ == "__main__":
+    main()

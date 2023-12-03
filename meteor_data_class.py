@@ -43,7 +43,7 @@ class MeteorDataEntry:
         self.states = states
         self.counties = counties
 
-    def __str__(self):
+    def get_name(self):
         """ Returns the name of the meteorite. """
         return self.name
 
