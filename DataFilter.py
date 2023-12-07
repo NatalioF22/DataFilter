@@ -199,7 +199,8 @@ def format_meteor_data_for_txt_file(meteor_list):
     meteor_list (list): List of MeteorDataEntry objects.
     """
     count , spacing =  0, 24
-    file_name = output_text_file_name()
+    current_datetime = datetime.datetime.now()
+    file_name = output_text_file_name(current_datetime)
     file = open(file_name, 'w')
     write_filtered_meteor_header_to_text_file(file)
     for meteor in meteor_list:

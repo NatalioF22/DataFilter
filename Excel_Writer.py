@@ -12,6 +12,7 @@
 """
 from xlwt import Workbook
 from File_Handler import output_text_file_name
+import datetime
 
 def create_excel_workbook()->object:
     """
@@ -91,8 +92,8 @@ def write_filtered_mass_data_to_excel_file(meteor_list:list, limits:list):
     write_header_row(ws, header)
 
     write_data_rows(ws, filtered_list)
-
-    file_name = output_text_file_name()
+    current_datetime = datetime.datetime.now()
+    file_name = output_text_file_name(current_datetime)
     save_workbook(wb, file_name)
 
 def filter_meteors_by_mass(meteor_list:list, limits:list):
@@ -126,8 +127,8 @@ def write_filtered_year_data_to_excel_file(meteor_list:list, limits:list):
     write_header_row(ws, header)
 
     write_data_rows(ws, filtered_list)
-
-    file_name = output_text_file_name()
+    current_datetime = datetime.datetime.now()
+    file_name = output_text_file_name(current_datetime)
     save_workbook(wb, file_name)
 
 def filter_meteors_by_year(meteor_list:list, limits:list) ->list[object]:

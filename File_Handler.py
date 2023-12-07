@@ -19,14 +19,14 @@ from meteorite_console_display import *
 import datetime
 
 
-def output_text_file_name():
+def output_text_file_name(current_datetime:object)->str:
     """
     This method generates a formatted date string for use in creating output text file names.
 
     Returns:
         str: Formatted date string.
     """
-    current_datetime = datetime.datetime.now()
+    
     replacements = [',', ':', " ", "."]
     formatted_date_string = str(current_datetime)
     for replacement in replacements:
@@ -160,9 +160,11 @@ def open_file_in_append_mode(file_name:str)-> object:
     Returns:
         file: File object.
     """
+
     file_obj = open(file_name,'a')
     return file_obj
-    
+
+        
 def open_file_in_exclusive_mode(file_name:str)->object:
     """
     Open a file in exclusive mode.
@@ -173,8 +175,12 @@ def open_file_in_exclusive_mode(file_name:str)->object:
     Returns:
         file: File object.
     """
-    file_obj = open(file_name,'x')
-    return file_obj
+    try:
+        file_obj = open(file_name, 'x')
+        return file_obj
+    except FileExistsError:
+        print(TerminalColors.RED + f"\nERROR: File '{file_name}' already exists!\n" + TerminalColors.RESET)
+        terminate_the_program()
 
 def open_file_with_user_mode(file_name:str)->object:
     """

@@ -42,7 +42,7 @@ def get_integer_input():
         print("\nPlease enter an integer.")
 
 
-def handle__year_filter_option_selection(meteor_list, limits):
+def handle_year_filter_option_selection(meteor_list, limits):
     """
     Handles the user's selection for year filtering options.
 
@@ -63,7 +63,7 @@ def handle__year_filter_option_selection(meteor_list, limits):
         print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
 
 
-def handle__mass_filter_option_selection(meteor_list, limits):
+def handle_mass_filter_option_selection(meteor_list, limits):
     """
     Handles the user's selection for mass filtering options.
 
@@ -95,7 +95,7 @@ def process_filtered_mass_data(file_name):
     meteor_list = extract_meteor_data_from_file(file_obj)
     limits = [get_mass_lower_limit(), get_mass_upper_limit()]
     print_the_output_option()
-    handle__mass_filter_option_selection(meteor_list, limits)
+    handle_mass_filter_option_selection(meteor_list, limits)
 
     
 def process_filtered_year_data(file_name):
@@ -109,7 +109,7 @@ def process_filtered_year_data(file_name):
     meteor_list = extract_meteor_data_from_file(file_obj)
     limits = [get_year_lower_limit(), get_year_upper_limit()]
     print_the_output_option()
-    handle__year_filter_option_selection(meteor_list, limits)
+    handle_year_filter_option_selection(meteor_list, limits)
 
 
 def process_user_choice(user_choice, file_name):
