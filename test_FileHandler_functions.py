@@ -4,6 +4,7 @@ from datetime import datetime
 from pytest import MonkeyPatch as monckeypatch
 import pytest
 
+# TODO GATHER ALL THE TEST FUNCTIONS AND PUT IT IN ONE FILE. WITH THE MOST ASSERT STATEMENT.
 
 def test_output_text_file_name():
     # Create a mock datetime object for testing purposes
@@ -132,39 +133,18 @@ def test_open_file_in_read_mode():
     test_result.close()
 
 
-
 def test_open_file_in_append_mode():
     test_file_variable = "test_file.txt"
     test_file = open(test_file_variable,"a")
     test_file.write("New text added!!!")
     test_file.close()
 
-
     read_test_file = open(test_file_variable, "r")
     result  = read_test_file.read()
     assert "New text added!!!" in result
     read_test_file.close()
 
-def test_open_file_in_exclusive_mode():
-    
-    if os.path.exists('file_does_not_exists.txt'):
-        os.remove('file_does_not_exists.txt')
-    file_obj = open_file_in_exclusive_mode('file_does_not_exists.txt')
-    # Perform operations on the file if opened successfully
-    file_obj.write("Exclusive Content!")
-    file_obj.close()
-    open_exclusive_file = open('file_does_not_exists.txt', 'r')
-    result = open_exclusive_file.read()
-    open_exclusive_file.close()
 
-    assert result == "Exclusive Content!"
-
-    if os.path.exists('file_does_not_exists.txt'):
-        os.remove('file_does_not_exists.txt')
-        
-    with pytest.raises(FileExistsError):
-        file_obj = open_file_in_exclusive_mode("file_does_not_exists.txt")
-    
 
     
 

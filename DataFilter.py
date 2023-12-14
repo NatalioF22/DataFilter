@@ -9,6 +9,8 @@
                a file, create MeteorDataEntry objects, display and write headers, and format and print filtered
                meteor data to the terminal or a text file.
 """
+import io
+
 from File_Handler import *
 from meteorite_console_display import *
 from meteor_data_class import MeteorDataEntry
@@ -116,15 +118,20 @@ def extract_meteor_data_from_file(file_obj: object) -> list[object]:
     Returns:
     list: List of MeteorDataEntry objects.
     """
-    meteor_list = []
-    header = file_obj.readline()
+    # TODO SPECIFY TO THE USER WHAT IS GOING ON
+    try:
+        meteor_list = []
+        header = file_obj.readline()
 
-    for line in file_obj:
-        values = line.split("\t")
-        if len(values) < 11: continue
-        meteor_object = create_meteor_object(values)
-        meteor_list.append(meteor_object) if meteor_object else None
-    return meteor_list
+        for line in file_obj:
+            values = line.split("\t")
+            if len(values) < 11: continue
+            meteor_object = create_meteor_object(values)
+            meteor_list.append(meteor_object) if meteor_object else None
+        return meteor_list
+    except io.UnsupportedOperation as e:
+        print("Cannnot read")
+        terminate_the_program()
 
 
 def create_meteor_object(values: list)->object or None:
@@ -184,6 +191,7 @@ def format_meteor_data_for_terminal(count:int, meteor:object)->None:
     count: Count of meteor data.
     meteor: MeteorDataEntry object.
     """
+    # TODO - Add counties to print out
     spacing = 24
     print(f"{count:<8}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
           f"{meteor.get_rec_class():<{spacing}}{meteor.get_mass():<{spacing}}{meteor.get_fall():<{spacing}}"
@@ -203,6 +211,7 @@ def format_meteor_data_for_txt_file(meteor_list):
     file_name = output_text_file_name(current_datetime)
     file = open(file_name, 'w')
     write_filtered_meteor_header_to_text_file(file)
+    # TODO - Add counties to print out
     for meteor in meteor_list:
         count += 1
         file.write \
@@ -220,6 +229,7 @@ def print_filtered_mass_data_to_terminal(meteor_list:list, limits:list)->None:
     meteor_list (list): List of MeteorDataEntry objects.
     limits (list): List containing lower and upper limits for mass filtering.
     """
+    # TODO - Add counties to print out
     print("mass filter")
     print_filtered_meteor_header()
     count = 0
@@ -236,6 +246,7 @@ def print_filtered_year_data_to_terminal(meteor_list:list, limits:list)->None:
     limits (list): List containing lower and upper limits for year filtering.
     """
     print("year filter")
+    # TODO - Add counties to print out
     print_filtered_meteor_header()
     count = 0
     for meteor in meteor_list:
@@ -250,6 +261,7 @@ def write_filtered_mass_data_to_txt_file(meteor_list:list, limits:list)->None:
     meteor_list (list): List of MeteorDataEntry objects.
     limits (list): List containing lower and upper limits for mass filtering.
     """
+    # TODO - Add counties to print out
 
     filtered_list = []
     for meteor in meteor_list:
@@ -264,6 +276,7 @@ def write_filtered_year_data_to_txt_file(meteor_list:list, limits:list)->None:
     meteor_list (list): List of MeteorDataEntry objects.
     limits (list): List containing lower and upper limits for year filtering.
     """
+    # TODO - Add counties to print out
 
     filtered_list = []
     for meteor in meteor_list:

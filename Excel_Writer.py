@@ -55,6 +55,7 @@ def write_data_rows(worksheet:object, filtered_list:list)->None:
         worksheet (Worksheet): Excel worksheet object.
         filtered_list (list): List of meteor objects to be written to the worksheet.
     """
+    # TODO - Add counties to print out
     for row, meteor in enumerate(filtered_list, start=1):
         data_row = [
             meteor.get_name(), meteor.get_id(), meteor.get_name_type(),
