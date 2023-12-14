@@ -19,7 +19,7 @@ from meteorite_console_display import *
 import datetime
 
 
-def output_text_file_name(current_datetime:object)->str:
+def output_text_file_name(current_datetime: object) -> str:
     """
     This method generates a formatted date string for use in creating output text file names.
 
@@ -31,10 +31,10 @@ def output_text_file_name(current_datetime:object)->str:
     formatted_date_string = str(current_datetime)
     for replacement in replacements:
         formatted_date_string = formatted_date_string.replace(replacement, "_")
-    return formatted_date_string
+    return f"{formatted_date_string}.txt"
 
 
-def check_if_file_exists(file_name:str) -> bool:
+def check_if_file_exists(file_name: str) -> bool:
     """
     Check if the specified file exists.
 
@@ -51,15 +51,16 @@ def check_if_file_exists(file_name:str) -> bool:
         print(TerminalColors.RED + f"\nERROR: TARGET FILE NAME: '{file_name}' IS NOT VALID!\n" + TerminalColors.RESET)
     
 
-@keyboard_interrupt_handler
-def prompt_for_valid_file_name_input()->str:
+
+def prompt_for_valid_file_name_input() -> str:
     """
     Prompt the user for a valid file name input.
 
     Returns:
         str: Valid file name.
     """
-    print("Enter a valid file name (ex. 'file_name.txt') with its file extension (if applicable) |or| Enter '>q' or '>Q' to quit: "  , end="")
+    print("Enter a valid file name (ex. 'file_name.txt') with its file extension (if applicable) |or| Enter '>q' or "
+          "'>Q' to quit: "  , end="")
     file_name = input(TerminalColors.GREEN)
     if file_name == ">q" or file_name == ">Q":
         terminate_the_program()
@@ -67,7 +68,7 @@ def prompt_for_valid_file_name_input()->str:
         return file_name
 
 
-def get_valid_file_name_loop()->str:
+def get_valid_file_name_loop() -> str:
     """
     Get a valid file name in a loop until a valid one is provided.
 
@@ -80,7 +81,7 @@ def get_valid_file_name_loop()->str:
     return file_name
 
 
-def prompt_for_file_name()->str:
+def prompt_for_file_name() -> str:
     """
     Prompt the user for a file name.
 
@@ -91,7 +92,7 @@ def prompt_for_file_name()->str:
     return result 
 
 
-def check_valid_mode(user_mode_input)->str:
+def check_valid_mode(user_mode_input) -> str:
     """
     Check if the specified file mode input is valid.
 
@@ -105,7 +106,8 @@ def check_valid_mode(user_mode_input)->str:
         terminate_the_program()
     return user_mode_input if user_mode_input.lower() in ['r','w','a','x'] else None
 
-def get_file_mode_input()->str:
+
+def get_file_mode_input() -> str:
     """
     Get valid file mode input from the user.
 
@@ -124,7 +126,7 @@ def get_file_mode_input()->str:
     return input_mode
 
 
-def open_file_in_read_mode(file_name:str)->object:
+def open_file_in_read_mode(file_name: str) -> object:
     """
     Open a file in read mode.
 
@@ -137,7 +139,8 @@ def open_file_in_read_mode(file_name:str)->object:
     file_obj = open(file_name)
     return file_obj
 
-def open_file_in_write_mode(file_name:str)->object:
+
+def open_file_in_write_mode(file_name: str) -> object:
     """
     Open a file in write mode.
 
@@ -150,7 +153,8 @@ def open_file_in_write_mode(file_name:str)->object:
     file_obj = open(file_name,'w')
     return file_obj
 
-def open_file_in_append_mode(file_name:str)-> object:
+
+def open_file_in_append_mode(file_name: str) -> object:
     """
     Open a file in append mode.
 
@@ -165,7 +169,7 @@ def open_file_in_append_mode(file_name:str)-> object:
     return file_obj
 
         
-def open_file_in_exclusive_mode(file_name:str)->object:
+def open_file_in_exclusive_mode(file_name: str) -> object:
     """
     Open a file in exclusive mode.
 
@@ -182,7 +186,8 @@ def open_file_in_exclusive_mode(file_name:str)->object:
         print(TerminalColors.RED + f"\nERROR: File '{file_name}' already exists!\n" + TerminalColors.RESET)
         terminate_the_program()
 
-def open_file_with_user_mode(file_name:str)->object:
+
+def open_file_with_user_mode(file_name: str) -> object:
     """
     Open a file based on user-provided mode.
 

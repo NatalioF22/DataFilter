@@ -14,7 +14,8 @@ from xlwt import Workbook
 from File_Handler import output_text_file_name
 import datetime
 
-def create_excel_workbook()->object:
+
+def create_excel_workbook() -> object:
     """
     Create a new Excel workbook.
 
@@ -23,7 +24,8 @@ def create_excel_workbook()->object:
     """
     return Workbook()
 
-def add_worksheet_to_workbook(workbook, sheet_name)->object:
+
+def add_worksheet_to_workbook(workbook:object, sheet_name: object) -> object:
     """
     Add a new worksheet to the Excel workbook.
 
@@ -36,7 +38,8 @@ def add_worksheet_to_workbook(workbook, sheet_name)->object:
     """
     return workbook.add_sheet(sheet_name)
 
-def write_header_row(worksheet, header)->None:
+
+def write_header_row(worksheet: object, header: object) -> None:
     """
     Write the header row to the Excel worksheet.
 
@@ -47,7 +50,8 @@ def write_header_row(worksheet, header)->None:
     for col, value in enumerate(header):
         worksheet.write(0, col, value)
 
-def write_data_rows(worksheet:object, filtered_list:list)->None:
+
+def write_data_rows(worksheet: object, filtered_list: list) -> None:
     """
     Write data rows to the Excel worksheet.
 
@@ -55,7 +59,6 @@ def write_data_rows(worksheet:object, filtered_list:list)->None:
         worksheet (Worksheet): Excel worksheet object.
         filtered_list (list): List of meteor objects to be written to the worksheet.
     """
-    # TODO - Add counties to print out
     for row, meteor in enumerate(filtered_list, start=1):
         data_row = [
             meteor.get_name(), meteor.get_id(), meteor.get_name_type(),
@@ -66,7 +69,8 @@ def write_data_rows(worksheet:object, filtered_list:list)->None:
         for col, value in enumerate(data_row):
             worksheet.write(row, col, value)
 
-def save_workbook(workbook:object, file_name:str)->None:
+
+def save_workbook(workbook: object, file_name: str) -> None:
     """
     Save the Excel workbook to a file.
 
@@ -76,7 +80,8 @@ def save_workbook(workbook:object, file_name:str)->None:
     """
     workbook.save(f"{file_name}.xls")
 
-def write_filtered_mass_data_to_excel_file(meteor_list:list, limits:list):
+
+def write_filtered_mass_data_to_excel_file(meteor_list: list, limits: list) -> None:
     """
     Write filtered meteor data based on mass to an Excel file.
 
@@ -97,7 +102,8 @@ def write_filtered_mass_data_to_excel_file(meteor_list:list, limits:list):
     file_name = output_text_file_name(current_datetime)
     save_workbook(wb, file_name)
 
-def filter_meteors_by_mass(meteor_list:list, limits:list):
+
+def filter_meteors_by_mass(meteor_list: list, limits: list) -> list[object]:
     """
     Filter meteor data by mass within the specified limits.
 
@@ -110,7 +116,8 @@ def filter_meteors_by_mass(meteor_list:list, limits:list):
     """
     return [meteor for meteor in meteor_list if limits[0] <= meteor.get_mass() <= limits[1]]
 
-def write_filtered_year_data_to_excel_file(meteor_list:list, limits:list):
+
+def write_filtered_year_data_to_excel_file(meteor_list: list, limits: list) ->None:
     """
     Write filtered meteor data based on year to an Excel file.
 
@@ -133,7 +140,8 @@ def write_filtered_year_data_to_excel_file(meteor_list:list, limits:list):
     file_name = output_text_file_name(current_datetime)
     save_workbook(wb, file_name)
 
-def filter_meteors_by_year(meteor_list:list, limits:list) ->list[object]:
+
+def filter_meteors_by_year(meteor_list: list, limits: list) -> list[object]:
     """
     Filter meteor data by year within the specified limits.
 

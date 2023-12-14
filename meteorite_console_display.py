@@ -43,6 +43,7 @@ def print_file_opening_modes():
     Enter ">q" or ">0" to quit """
     )
 
+
 def print_filter_menu_options():
     print("What attribute would you like to filter the data on?")
     print("1. Meteor MASS(g)")
@@ -53,6 +54,7 @@ def print_filter_menu_options():
 def terminate_the_program() -> exit:
     print(TerminalColors.RESET + "\nThe program is now exiting... GOODBYE!\n" + TerminalColors.RESET)
     exit()
+
 
 def print_the_output_option():
     print("How would you like to output the filter results?")

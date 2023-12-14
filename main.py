@@ -27,6 +27,7 @@ def get_valid_integer_input_with_retry(func):
         result = func()
     return result
 
+
 def get_integer_input():
     """
     Gets integer input from the user.
@@ -139,6 +140,7 @@ def main():
     lst = extract_meteor_data_from_file(file_obj)
     user_choice = get_user_filter_choice()
     process_user_choice(user_choice, file_name)
+
 
 if __name__ == "__main__":
     main()

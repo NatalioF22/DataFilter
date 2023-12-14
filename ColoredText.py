@@ -5,6 +5,8 @@
     Section: 002
     Date: December 3rd, 2023
 """
+
+
 class TerminalColors:
     """
     A utility class for defining ANSI escape codes for text color and formatting in the terminal.
