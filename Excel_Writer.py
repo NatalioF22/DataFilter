@@ -61,7 +61,7 @@ def write_data_rows(worksheet:object, filtered_list:list)->None:
             meteor.get_name(), meteor.get_id(), meteor.get_name_type(),
             meteor.get_rec_class(), meteor.get_mass(), meteor.get_fall(),
             meteor.get_year(), meteor.get_rec_lat(), meteor.get_rec_long(),
-            meteor.get_geo_location(), meteor.get_states()
+            meteor.get_geo_location(), meteor.get_counties(), meteor.get_states()
         ]
         for col, value in enumerate(data_row):
             worksheet.write(row, col, value)
@@ -89,7 +89,7 @@ def write_filtered_mass_data_to_excel_file(meteor_list:list, limits:list):
     wb = create_excel_workbook()
     ws = add_worksheet_to_workbook(wb, 'Meteor Data')
 
-    header = ['Name', 'ID', 'Name Type', 'Rec Class', 'Mass (g)', 'Fall', 'Year', 'Rec Lat', 'Rec Long', 'Geo Location', 'States']
+    header = ['Name', 'ID', 'Name Type', 'Rec Class', 'Mass (g)', 'Fall', 'Year', 'Rec Lat', 'Rec Long', 'Geo Location', 'counties', 'States']
     write_header_row(ws, header)
 
     write_data_rows(ws, filtered_list)
@@ -124,7 +124,8 @@ def write_filtered_year_data_to_excel_file(meteor_list:list, limits:list):
     wb = create_excel_workbook()
     ws = add_worksheet_to_workbook(wb, 'Meteor Data')
 
-    header = ['Name', 'ID', 'Name Type', 'Rec Class', 'Mass (g)', 'Fall', 'Year', 'Rec Lat', 'Rec Long', 'Geo Location', 'States']
+    header = ['Name', 'ID', 'Name Type', 'Rec Class', 'Mass (g)', 'Fall', 'Year', 'Rec Lat', 'Rec Long', 'Geo Location',
+              'counties', 'States']
     write_header_row(ws, header)
 
     write_data_rows(ws, filtered_list)

@@ -175,12 +175,12 @@ def write_filtered_meteor_header_to_text_file(file:object)->None:
     """
     name_label, id_label, name_type_label, rec_class_label = 'name', 'id', 'nametype', 'recclass'
     mass_g_label, fall_label, year_label, rec_lat_label, rec_long_label = 'mass_g', 'fall', 'year', 'reclat', 'reclong'
-    geo_location_label, states_label = 'geolocation', 'states'
-    spacing = 23
-    file.write(f"{' ' * 7} {name_label:<{spacing}} {id_label:<{spacing}} {name_type_label:<{spacing}} "
-               f"{rec_class_label:<{spacing}} {mass_g_label:<{spacing}} {fall_label:<{spacing}} "
-               f"{year_label:<{spacing}} {rec_lat_label:<{spacing}} {rec_long_label:<{spacing}}"
-               f" {geo_location_label:<{spacing + 8}} {states_label}")
+    geo_location_label, states_label, counties_label = 'geolocation', 'states', 'counties'
+    spacing = "\t"
+    file.write(f"{name_label}{spacing} {id_label}{spacing}{name_type_label}{spacing}"
+               f"{rec_class_label}{spacing}{mass_g_label}{spacing}{fall_label}{spacing}"
+               f"{year_label}{spacing}{rec_lat_label}{spacing}{rec_long_label}{spacing}"
+               f" {geo_location_label}{spacing}{counties_label}{spacing}{states_label}")
 
 
 def format_meteor_data_for_terminal(count:int, meteor:object)->None:
@@ -192,6 +192,7 @@ def format_meteor_data_for_terminal(count:int, meteor:object)->None:
     meteor: MeteorDataEntry object.
     """
     # TODO - Add counties to print out
+
     spacing = 24
     print(f"{count:<8}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
           f"{meteor.get_rec_class():<{spacing}}{meteor.get_mass():<{spacing}}{meteor.get_fall():<{spacing}}"
@@ -202,24 +203,23 @@ def format_meteor_data_for_terminal(count:int, meteor:object)->None:
 def format_meteor_data_for_txt_file(meteor_list):
     """
     Formats meteor data for writing to a text file.
-
     Parameters:
     meteor_list (list): List of MeteorDataEntry objects.
     """
-    count , spacing =  0, 24
+    # TODO FORMAT THE OUTPUT SPACING TO TABS
+    spacing = "\t"
     current_datetime = datetime.datetime.now()
     file_name = output_text_file_name(current_datetime)
     file = open(file_name, 'w')
     write_filtered_meteor_header_to_text_file(file)
     # TODO - Add counties to print out
     for meteor in meteor_list:
-        count += 1
         file.write \
-            (f"\n{count:<8}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
-                   f"{meteor.get_rec_class():<{spacing}}{meteor.get_mass():<{spacing}}{meteor.get_fall():<{spacing}}"
-                   f"{meteor.get_year():<{spacing}}{meteor.get_rec_lat():<{spacing}}{meteor.get_rec_long():<{spacing}}"
-                   f"{meteor.get_geo_location():<{spacing +8}}{meteor.get_states():<{spacing}}")
-        
+            (f"\n{meteor.get_name()}{spacing}{meteor.get_id()}{spacing}{meteor.get_name_type()}{spacing}"
+                   f"{meteor.get_rec_class()}{spacing}{meteor.get_mass()}{spacing}{meteor.get_fall()}{spacing}"
+                   f"{meteor.get_year()}{spacing}{meteor.get_rec_lat()}{spacing}{meteor.get_rec_long()}{spacing}"
+                   f"{meteor.get_geo_location()}{spacing}{meteor.get_counties()}{spacing}{meteor.get_states()}")
+
 
 def print_filtered_mass_data_to_terminal(meteor_list:list, limits:list)->None:
     """
@@ -262,6 +262,7 @@ def write_filtered_mass_data_to_txt_file(meteor_list:list, limits:list)->None:
     limits (list): List containing lower and upper limits for mass filtering.
     """
     # TODO - Add counties to print out
+    # TODO FORMAT THE OUTPUT SPACING TO TABS
 
     filtered_list = []
     for meteor in meteor_list:
@@ -277,6 +278,7 @@ def write_filtered_year_data_to_txt_file(meteor_list:list, limits:list)->None:
     limits (list): List containing lower and upper limits for year filtering.
     """
     # TODO - Add counties to print out
+    # TODO FORMAT THE OUTPUT SPACING TO TABS
 
     filtered_list = []
     for meteor in meteor_list:

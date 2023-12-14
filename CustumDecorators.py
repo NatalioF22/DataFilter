@@ -34,6 +34,7 @@ def wrapped_function(function_name, *args, **kwargs):
     except KeyboardInterrupt:
         handle_keyboard_interrupt()
 
+
 def keyboard_interrupt_handler(function_name):
     """
     Decorator that wraps a function with error handling for KeyboardInterrupt.
