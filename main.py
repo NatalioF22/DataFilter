@@ -79,11 +79,10 @@ def handle_mass_filter_option_selection(meteor_list, limits):
     elif selected_output_option == 2:
         write_filtered_mass_data_to_txt_file(meteor_list, limits)
     elif selected_output_option == 3:
-        write_filtered_mass_data_to_excel_file(meteor_list, limits)  # Add logic for handling option 3
+        filter_meteors_by_mass(meteor_list, limits)  # Add logic for handling option 3
     elif selected_output_option == 4:
         terminate_the_program()
-    else:
-        print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
+    else: print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
 
 
 def process_filtered_mass_data(file_name):
@@ -99,7 +98,7 @@ def process_filtered_mass_data(file_name):
     print_the_output_option()
     handle_mass_filter_option_selection(meteor_list, limits)
 
-    
+
 def process_filtered_year_data(file_name):
     """
     Processes and filters meteor data based on year.
@@ -141,6 +140,7 @@ def main():
     lst = extract_meteor_data_from_file(file_obj)
     user_choice = get_user_filter_choice()
     process_user_choice(user_choice, file_name)
+    print("\nProcess Completed!!!")
 
 
 if __name__ == "__main__":

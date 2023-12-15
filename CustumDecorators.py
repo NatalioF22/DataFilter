@@ -61,8 +61,6 @@ def value_error_handler_decorator(function_name):
     return lambda *args, **kwargs: handle_value_error_in_loop(function_name)
 
 
-# Handle Value Error
-
 def handle_value_error_message():
     """
     Prints a value error message.

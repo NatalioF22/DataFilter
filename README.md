@@ -4,7 +4,9 @@
 
 ## Overview
 
-This is a Python script designed to filter and process meteor data based on user-specified criteria. The script provides a user-friendly interface to interact with meteor data, allowing users to filter data by mass or year and choose various output options. The project includes error handling functionalities, ensuring a smooth user experience.
+This is a Python script designed to filter and process meteor data based on user-specified criteria. The script provides
+a user-friendly interface to interact with meteor data, allowing users to filter data by mass or year and choose various
+output options. The project includes error handling functionalities, ensuring a smooth user experience.
 
 ## How to Test
 
@@ -20,17 +22,16 @@ To test the script, follow these steps:
    Follow the on-screen instructions to provide the required inputs, such as the file name and filtering options.
 
 3. **Test Filtering Options:**
-   - Option 1 - Filter meteor data based on mass.
-   - Option 2 - Filter meteor data based on year.
+    - Option 1 - Filter meteor data based on mass.
+    - Option 2 - Filter meteor data based on year.
 
 4. **Verify Output:**
-   The script will display or generate filtered meteor data based on your chosen criteria. Verify that the output aligns with your expectations.
+   The script will display or generate filtered meteor data based on your chosen criteria. Verify that the output aligns
+   with your expectations.
 
 ## Status
 
-The current version of the project is functional and provides all the filtering options. However, the project is incomplete, therefore unit test needs to be added to ensure robustness and reliability.
+The current version of the project is functional and provides all the filtering options.
+Unit tests and comments are added, the next commits are to ensure robustness and reliability.
 
-## To-Do
-
-- Implement unit tests to validate the functionality of the script.
 

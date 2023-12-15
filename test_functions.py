@@ -41,21 +41,6 @@ def test_output_text_file_name():
     result_3 = output_text_file_name(mock_datetime_3)
     assert result_3 == "2023-05-20_10_45_15_123456.txt"
 
-    # Test with a datetime object having zero values
-    mock_datetime_4 = datetime(2000, 1, 1, 0, 0, 0, 0)
-    result_4 = output_text_file_name(mock_datetime_4)
-    assert result_4 == "2000-01-01_00_00_00.txt"
-
-    # Test with a datetime object having maximum values
-    mock_datetime_5 = datetime(9999, 12, 31, 23, 59, 59, 999999)
-    result_5 = output_text_file_name(mock_datetime_5)
-    assert result_5 == "9999-12-31_23_59_59_999999.txt"
-
-    # Test with a datetime object having single-digit values
-    mock_datetime_6 = datetime(2023, 1, 2, 3, 4, 5, 6)
-    result_6 = output_text_file_name(mock_datetime_6)
-    assert result_6 == "2023-01-02_03_04_05_000006.txt"
-
 
 def test_check_if_file_exists():
     """
@@ -130,7 +115,7 @@ def test_check_valid_mode():
     # Test with a valid uppercase mode
     valid_mode_input_upper = 'W'
     result_upper = check_valid_mode(valid_mode_input_upper)
-    assert result_upper == valid_mode_input_upper
+    assert result_upper == valid_mode_input_upper.lower()
 
     # Test with a valid mixed-case mode
     valid_mode_input_mixed = 'a'

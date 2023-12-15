@@ -12,8 +12,8 @@ class MeteorDataEntry:
     location data. Objects of this class can be used to store and retrieve meteor-related data efficiently.
     """
 
-    def __init__(self, name:str, id:int, name_type:str, rec_class:str, mass_g:int, fall:str, year:int, rec_lat:float, rec_long:float, geo_location:str, states:str,
-                 counties:str):
+    def __init__(self, name: str,id: int, name_type: str, rec_class: str, mass_g: int, fall: str, year: int,
+                 rec_lat: float, rec_long: float, geo_location: str, states: str, counties: str):
         """
         All the fields passed in the parameters are stored in the fields preset by self.
         Attributes:
@@ -27,8 +27,8 @@ class MeteorDataEntry:
             rec_lat (float): The recorded latitude of the meteorite's location.
             rec_long (float): The recorded longitude of the meteorite's location.
             geo_location (str): A string representation of the meteorite's geographical location.
-            states (str): The state or states associated with the meteorite's location.
-            counties (str): The county or counties associated with the meteorite's location.
+            states (int): The state or states associated with the meteorite's location.
+            counties (int): The county or counties associated with the meteorite's location.
         """
         self.name = name
         self.id = id

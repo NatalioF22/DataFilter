@@ -17,23 +17,6 @@ from Excel_Writer import *
 
 
 @value_error_handler
-def get_valid_user_input_choice() -> int:
-    """
-    Prompts the user to enter a valid choice for filtering meteor data.
-
-    Returns:
-    int: User's valid choice (1, 2, or 3).
-    """
-
-    print_filter_menu_options()
-    user_input = int(input(">>"))
-    if user_input not in [1, 2, 3]:
-        print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
-    else:
-        return user_input
-
-
-
 def get_user_filter_choice() -> int:
     """
     Continuously prompts the user for a valid filter choice until one is entered.
@@ -42,7 +25,12 @@ def get_user_filter_choice() -> int:
     int: User's valid filter choice.
     """
     while True:
-        return get_valid_user_input_choice()
+        print_filter_menu_options()
+        user_input = int(input(">>"))
+        if user_input not in [1, 2, 3]:
+            print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
+        else:
+            return user_input
 
 
 @input_validation_decorator
@@ -54,7 +42,7 @@ def get_mass_lower_limit() -> int:
     int: Lower limit for meteor mass.
     """
     lower_limit = input(f"Enter the LOWER limit (inclusive) for meteor's MASS (g) ('Q' to QUIT): ")
-    if lower_limit == "q":
+    if lower_limit.lower() == "q":
         terminate_the_program()
     else:
         return int(lower_limit)
@@ -69,7 +57,7 @@ def get_mass_upper_limit() -> int:
     int: Upper limit for meteor mass.
     """
     upper_limit = input("Enter the UPPER limit (inclusive) for meteor's MASS (g) ('Q' to QUIT): ")
-    if upper_limit == "q":
+    if upper_limit.lower() == "q":
         terminate_the_program()
     else:
         return int(upper_limit)
@@ -84,7 +72,7 @@ def get_year_lower_limit() -> int:
     int: Lower limit for meteor year.
     """
     year_lower_limit = input("Enter the LOWER limit (inclusive) for meteor's YEAR ('Q' to QUIT): ")
-    if year_lower_limit == "q":
+    if year_lower_limit.lower() == "q":
         terminate_the_program()
     else:
         return int(year_lower_limit)
@@ -100,7 +88,7 @@ def get_year_upper_limit() -> int:
     """
 
     year_upper_limit = input("Enter the UPPER limit (inclusive) for meteor's YEAR ('Q' to QUIT): ")
-    if year_upper_limit == "q":
+    if year_upper_limit.lower() == "q" :
         terminate_the_program()
     else:
         return int(year_upper_limit)
@@ -122,7 +110,7 @@ def extract_meteor_data_from_file(file_obj: object) -> list[object]:
 
         for line in file_obj:
             values = line.split("\t")
-            if len(values) < 11: continue
+            if len(values) < 12: continue
             meteor_object = create_meteor_object(values)
             meteor_list.append(meteor_object) if meteor_object else None
         return meteor_list
@@ -132,7 +120,7 @@ def extract_meteor_data_from_file(file_obj: object) -> list[object]:
         terminate_the_program()
 
 
-def create_meteor_object(values: list) -> object or None:
+def create_meteor_object(values: list) -> object:
     """
     Creates a MeteorDataEntry object from a list of values.
 
@@ -140,14 +128,15 @@ def create_meteor_object(values: list) -> object or None:
     values (list): List of values representing meteor data.
 
     Returns:
-    MeteorDataEntry or None: MeteorDataEntry object if creation is successful, None otherwise.
+    MeteorDataEntry: MeteorDataEntry object.
     """
+    name, meteorite_id, name_type, rec_class, mass_g, fall, year, rec_lat, rec_long, geo_location, states, counties = values
     try:
-        name, meteorite_id, name_type, rec_class, mass_g, fall, year, rec_lat, rec_long, geo_location, states, counties = values
         return MeteorDataEntry(name, meteorite_id, name_type, rec_class, int(mass_g), fall, int(year), rec_lat,
                                rec_long, geo_location, states, counties)
     except ValueError as e:
-        return None
+        return MeteorDataEntry(name, meteorite_id, name_type, rec_class, -1, fall, -1, rec_lat,
+                               rec_long, geo_location, states, counties)
 
 
 def print_filtered_meteor_header() -> None:
@@ -157,12 +146,12 @@ def print_filtered_meteor_header() -> None:
     name_label, id_label, name_type_label, rec_class_label = 'name', 'id', 'nametype', 'recclass'
     mass_g_label, fall_label, year_label, rec_lat_label, rec_long_label = 'mass_g', 'fall', 'year', 'reclat', 'reclong'
     geo_location_label, states_label, counties_label = 'geolocation', 'states', 'counties'
-    spacing = 24
+    spacing = 23
     print(f"{' ' * 7} {name_label:<{spacing}} {id_label:<{spacing}} {name_type_label:<{spacing}} "
           f"{rec_class_label:<{spacing}} {mass_g_label:<{spacing}} {fall_label:<{spacing}} "
           f"{year_label:<{spacing}} {rec_lat_label:<{spacing}} {rec_long_label:<{spacing}}"
           f" {geo_location_label:<{spacing + 8}}{counties_label:<{spacing}}{states_label}")
-    print("=" * 200)
+    print("=" * 300)
 
 
 def write_filtered_meteor_header_to_text_file(file: object) -> None:
@@ -179,7 +168,7 @@ def write_filtered_meteor_header_to_text_file(file: object) -> None:
     file.write(f"{name_label}{spacing} {id_label}{spacing}{name_type_label}{spacing}"
                f"{rec_class_label}{spacing}{mass_g_label}{spacing}{fall_label}{spacing}"
                f"{year_label}{spacing}{rec_lat_label}{spacing}{rec_long_label}{spacing}"
-               f" {geo_location_label}{spacing}{counties_label}{spacing}{states_label}")
+               f" {geo_location_label}{spacing}{states_label}{spacing}{counties_label}")
 
 
 def format_meteor_data_for_terminal(count:int, meteor:object)->None:
@@ -192,10 +181,13 @@ def format_meteor_data_for_terminal(count:int, meteor:object)->None:
     """
     # TODO - Add counties to print out
     spacing = 24
-    print(f"{count:<8}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
+
+    counties = meteor.get_counties() if meteor.get_counties() else ""
+    states = meteor.get_states() if meteor.get_states() else ""
+    print(f"{count:<7}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
           f"{meteor.get_rec_class():<{spacing}}{meteor.get_mass():<{spacing}}{meteor.get_fall():<{spacing}}"
           f"{meteor.get_year():<{spacing}}{meteor.get_rec_lat():<{spacing}}{meteor.get_rec_long():<{spacing}}"
-          f"{meteor.get_geo_location():<{spacing}}{meteor.get_counties():<{spacing}}{meteor.get_states():<{spacing}}")
+          f"{meteor.get_geo_location():<{spacing+8}}{states:<{spacing}}{counties}",end="")
 
 
 def format_meteor_data_for_txt_file(meteor_list: list[object]) -> None:
@@ -207,14 +199,14 @@ def format_meteor_data_for_txt_file(meteor_list: list[object]) -> None:
     spacing = "\t"
     current_datetime = datetime.datetime.now()
     file_name = output_text_file_name(current_datetime)
-    file = open(file_name, 'w')
+    file = open(file_name, 'a')
+
     write_filtered_meteor_header_to_text_file(file)
     for meteor in meteor_list:
-        file.write \
-            (f"\n{meteor.get_name()}{spacing}{meteor.get_id()}{spacing}{meteor.get_name_type()}{spacing}"
+        file.write(f"{meteor.get_name()}{spacing}{meteor.get_id()}{spacing}{meteor.get_name_type()}{spacing}"
              f"{meteor.get_rec_class()}{spacing}{meteor.get_mass()}{spacing}{meteor.get_fall()}{spacing}"
              f"{meteor.get_year()}{spacing}{meteor.get_rec_lat()}{spacing}{meteor.get_rec_long()}{spacing}"
-             f"{meteor.get_geo_location()}{spacing}{meteor.get_counties()}{spacing}{meteor.get_states()}")
+             f"{meteor.get_geo_location()}{spacing}{meteor.get_states()}{spacing}{meteor.get_counties()}")
 
 
 def print_filtered_mass_data_to_terminal(meteor_list: list, limits: list) -> None:
@@ -225,7 +217,6 @@ def print_filtered_mass_data_to_terminal(meteor_list: list, limits: list) -> Non
     meteor_list (list): List of MeteorDataEntry objects.
     limits (list): List containing lower and upper limits for mass filtering.
     """
-    # TODO - Add counties to print out
     print("mass filter")
     print_filtered_meteor_header()
     count = 0

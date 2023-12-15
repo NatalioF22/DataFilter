@@ -45,7 +45,6 @@ def check_if_file_exists(file_name: str) -> bool:
         print(TerminalColors.RED + f"\nERROR: TARGET FILE NAME: '{file_name}' IS NOT VALID!\n" + TerminalColors.RESET)
     
 
-
 def prompt_for_valid_file_name_input() -> str:
     """
     Prompt the user for a valid file name input.
@@ -54,7 +53,7 @@ def prompt_for_valid_file_name_input() -> str:
         str: Valid file name.
     """
     print("Enter a valid file name (ex. 'file_name.txt') with its file extension (if applicable) |or| Enter '>q' or "
-          "'>Q' to quit: "  , end="")
+          "'>Q' to quit: ", end="")
     file_name = input(TerminalColors.GREEN)
     if file_name == ">q" or file_name == ">Q":
         terminate_the_program()
@@ -98,7 +97,7 @@ def check_valid_mode(user_mode_input) -> str:
     """
     if user_mode_input.lower() == '>q':
         terminate_the_program()
-    return user_mode_input if user_mode_input.lower() in ['r','w','a','x'] else None
+    return user_mode_input.lower() if user_mode_input.lower() in ['r','w','a','x'] else None
 
 
 def get_file_mode_input() -> str:
