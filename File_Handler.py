@@ -9,15 +9,11 @@
     This module provides utility functions for file handling, including file opening modes, 
     file name validation, and user prompts.
 """
-
-from ColoredText import TerminalColors
 import os
-from CustumDecorators import *
 from meteorite_console_display import *
-import datetime
 
 
-def output_text_file_name(current_datetime: object) -> str:
+def output_text_file_name(current_datetime: object, extension= ".txt") -> str:
     """
     This method generates a formatted date string for use in creating output text file names.
 
@@ -29,7 +25,7 @@ def output_text_file_name(current_datetime: object) -> str:
     formatted_date_string = str(current_datetime)
     for replacement in replacements:
         formatted_date_string = formatted_date_string.replace(replacement, "_")
-    return f"{formatted_date_string}.txt"
+    return f"{formatted_date_string}{extension}"
 
 
 def check_if_file_exists(file_name: str) -> bool:

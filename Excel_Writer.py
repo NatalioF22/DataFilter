@@ -99,7 +99,7 @@ def write_filtered_mass_data_to_excel_file(meteor_list: list, limits: list) -> N
 
     write_data_rows(ws, filtered_list)
     current_datetime = datetime.datetime.now()
-    file_name = output_text_file_name(current_datetime)
+    file_name = output_text_file_name(current_datetime,'')
     save_workbook(wb, file_name)
 
 

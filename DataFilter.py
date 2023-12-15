@@ -10,10 +10,9 @@
                meteor data to the terminal or a text file.
 """
 import io
-from File_Handler import *
+from CustumDecorators import *
 from meteorite_console_display import *
 from meteor_data_class import MeteorDataEntry
-import datetime
 from Excel_Writer import *
 
 
@@ -117,7 +116,6 @@ def extract_meteor_data_from_file(file_obj: object) -> list[object]:
     Returns:
     list: List of MeteorDataEntry objects.
     """
-    # TODO SPECIFY TO THE USER WHAT IS GOING ON
     try:
         meteor_list = []
         header = file_obj.readline()
@@ -158,13 +156,13 @@ def print_filtered_meteor_header() -> None:
     """
     name_label, id_label, name_type_label, rec_class_label = 'name', 'id', 'nametype', 'recclass'
     mass_g_label, fall_label, year_label, rec_lat_label, rec_long_label = 'mass_g', 'fall', 'year', 'reclat', 'reclong'
-    geo_location_label, states_label = 'geolocation', 'states'
-    spacing = 23
+    geo_location_label, states_label, counties_label = 'geolocation', 'states', 'counties'
+    spacing = 24
     print(f"{' ' * 7} {name_label:<{spacing}} {id_label:<{spacing}} {name_type_label:<{spacing}} "
           f"{rec_class_label:<{spacing}} {mass_g_label:<{spacing}} {fall_label:<{spacing}} "
           f"{year_label:<{spacing}} {rec_lat_label:<{spacing}} {rec_long_label:<{spacing}}"
-          f" {geo_location_label:<{spacing + 8}} {states_label}")
-    print("=" * 265)
+          f" {geo_location_label:<{spacing + 8}}{counties_label:<{spacing}}{states_label}")
+    print("=" * 200)
 
 
 def write_filtered_meteor_header_to_text_file(file: object) -> None:
@@ -184,7 +182,7 @@ def write_filtered_meteor_header_to_text_file(file: object) -> None:
                f" {geo_location_label}{spacing}{counties_label}{spacing}{states_label}")
 
 
-def format_meteor_data_for_terminal(count: int, meteor: object) -> None:
+def format_meteor_data_for_terminal(count:int, meteor:object)->None:
     """
     Formats meteor data for display in the terminal.
 
@@ -197,7 +195,7 @@ def format_meteor_data_for_terminal(count: int, meteor: object) -> None:
     print(f"{count:<8}{meteor.get_name():<{spacing}}{meteor.get_id():<{spacing}}{meteor.get_name_type():<{spacing}}"
           f"{meteor.get_rec_class():<{spacing}}{meteor.get_mass():<{spacing}}{meteor.get_fall():<{spacing}}"
           f"{meteor.get_year():<{spacing}}{meteor.get_rec_lat():<{spacing}}{meteor.get_rec_long():<{spacing}}"
-          f"{meteor.get_geo_location():<{spacing + 8}}{meteor.get_counties():<{spacing}}{meteor.get_states()}")
+          f"{meteor.get_geo_location():<{spacing}}{meteor.get_counties():<{spacing}}{meteor.get_states():<{spacing}}")
 
 
 def format_meteor_data_for_txt_file(meteor_list: list[object]) -> None:
@@ -206,13 +204,11 @@ def format_meteor_data_for_txt_file(meteor_list: list[object]) -> None:
     Parameters:
     meteor_list (list): List of MeteorDataEntry objects.
     """
-    # TODO FORMAT THE OUTPUT SPACING TO TABS
     spacing = "\t"
     current_datetime = datetime.datetime.now()
     file_name = output_text_file_name(current_datetime)
     file = open(file_name, 'w')
     write_filtered_meteor_header_to_text_file(file)
-    # TODO - Add counties to print out
     for meteor in meteor_list:
         file.write \
             (f"\n{meteor.get_name()}{spacing}{meteor.get_id()}{spacing}{meteor.get_name_type()}{spacing}"

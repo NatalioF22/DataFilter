@@ -6,6 +6,8 @@
     Date: December 3rd, 2023
 """
 from ColoredText import TerminalColors
+
+
 def print_welcome_message():
     """
     Print a welcome message for the Meteorite Filtering Application.

@@ -10,6 +10,7 @@ Functionality: This script serves as the main entry point for Project 1.2, allow
 """
 
 from DataFilter import *
+from File_Handler import *
 
 
 def get_valid_integer_input_with_retry(func):
