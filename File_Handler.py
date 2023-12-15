@@ -3,11 +3,9 @@
     Author: Natalio Gomes
     Class: COMP390
     Section: 002
-    Date: December 3rd, 2023
-
+    Date: December 14th, 2023
 
     File Handler File
-
     This module provides utility functions for file handling, including file opening modes, 
     file name validation, and user prompts.
 """

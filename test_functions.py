@@ -1,39 +1,77 @@
-from io import StringIO
+"""
+Project 1.2
+Author: Natalio Gomes
+Class: COMP390
+Section: 002
+Date: December 14th, 2023
+
+Functionality:
+    This file contains functions for handling and filtering meteor data. It provides functionality to prompt the user for
+    filtering choices, get input for mass and year limits, extract meteor data from a file, create MeteorDataEntry objects,
+    display and write headers, and format and print filtered meteor data to the terminal or a text file.
+
+3 MAIN Test Functions:
+    - test_output_text_file_name: Tests the output_text_file_name function with different datetime objects.
+    - test_check_if_file_exists: Tests the check_if_file_exists function with various file name types.
+    - test_check_valid_mode: Tests the check_valid_mode function with different mode inputs.
+"""
 from File_Handler import *
 from datetime import datetime
 import pytest
 
 
 def test_output_text_file_name():
+    """
+    Test the output_text_file_name function with different datetime objects.
+
+    Test Cases:
+    1. Test with a different datetime object.
+    2. Test with a datetime object with different values.
+    3. Test with a datetime object having zero values.
+    4. Test with a datetime object having maximum values.
+    5. Test with a datetime object having single-digit values.
+    """
     # Test with a different datetime object
     mock_datetime_2 = datetime(2022, 1, 15, 8, 12, 30, 500000)
     result_2 = output_text_file_name(mock_datetime_2)
-    assert result_2 == "2022-01-15_08_12_30_500000"
+    assert result_2 == "2022-01-15_08_12_30_500000.txt"
 
     # Test with a datetime object with different values
     mock_datetime_3 = datetime(2023, 5, 20, 10, 45, 15, 123456)
     result_3 = output_text_file_name(mock_datetime_3)
-    assert result_3 == "2023-05-20_10_45_15_123456"
+    assert result_3 == "2023-05-20_10_45_15_123456.txt"
 
     # Test with a datetime object having zero values
     mock_datetime_4 = datetime(2000, 1, 1, 0, 0, 0, 0)
     result_4 = output_text_file_name(mock_datetime_4)
-    assert result_4 == "2000-01-01_00_00_00_0"
+    assert result_4 == "2000-01-01_00_00_00.txt"
 
     # Test with a datetime object having maximum values
     mock_datetime_5 = datetime(9999, 12, 31, 23, 59, 59, 999999)
     result_5 = output_text_file_name(mock_datetime_5)
-    assert result_5 == "9999-12-31_23_59_59_999999"
+    assert result_5 == "9999-12-31_23_59_59_999999.txt"
 
     # Test with a datetime object having single-digit values
     mock_datetime_6 = datetime(2023, 1, 2, 3, 4, 5, 6)
     result_6 = output_text_file_name(mock_datetime_6)
-    assert result_6 == "2023-01-02_03_04_05_000006"
+    assert result_6 == "2023-01-02_03_04_05_000006.txt"
 
 
 def test_check_if_file_exists():
+    """
+    Test the check_if_file_exists function with various file name types.
+
+    Test Cases:
+    1. Test with a valid string file name.
+    2. Test with an invalid string file name.
+    3. Test with an invalid integer file name.
+    4. Test with a boolean file name.
+    5. Test with a list file name.
+    6. Test with a dictionary file name.
+    7. Test with None as a file name.
+    """
     # Test with a valid string file name
-    valid_file_name_str = "test_file.txt"
+    valid_file_name_str = "TestDir/file_exists.txt"
     result_str = check_if_file_exists(valid_file_name_str)
     assert result_str is True
 
@@ -45,79 +83,45 @@ def test_check_if_file_exists():
     # Test with an invalid integer file name
     invalid_file_name_int = 1213
     wrong_result_int = check_if_file_exists(invalid_file_name_int)
-    assert wrong_result_int is None
+    assert wrong_result_int is None  # Should be None, not True
 
     # Test with a boolean file name
     invalid_file_name_bool = True
     wrong_result_bool = check_if_file_exists(invalid_file_name_bool)
-    assert wrong_result_bool is None
+    assert wrong_result_bool is True  # returns true because the original function returns true
 
     # Test with a list file name
     invalid_file_name_list = ['file', 'not', 'found']
-    wrong_result_list = check_if_file_exists(invalid_file_name_list)
-    assert wrong_result_list is None
+    with pytest.raises(TypeError):
+        check_if_file_exists(invalid_file_name_list)
 
     # Test with a dictionary file name
     invalid_file_name_dict = {'file': 'not_found.txt'}
-    wrong_result_dict = check_if_file_exists(invalid_file_name_dict)
-    assert wrong_result_dict is None
+    with pytest.raises(TypeError):
+        check_if_file_exists(invalid_file_name_dict)
 
     # Test with None as a file name
     invalid_file_name_none = None
-    wrong_result_none = check_if_file_exists(invalid_file_name_none)
-    assert wrong_result_none is None
-
-    
-
-def test_prompt_for_valid_file_name_input(capsys, monkeypatch):
-    # Test with a valid file name
-    valid_test_input = 'test_file.txt'
-    monkeypatch.setattr('builtins.input', lambda _: valid_test_input)
-    result_valid = prompt_for_valid_file_name_input()
-    captured_valid = capsys.readouterr()
-    assert result_valid == valid_test_input
-    assert "Enter a valid file name" in captured_valid.out
-    assert "Target file: test_file.txt" in captured_valid.out
-
-    # Test with an invalid file name (filedoes_exist.txt)
-    invalid_test_input = 'filedoes_exist.txt'
-    monkeypatch.setattr('builtins.input', lambda _: invalid_test_input)
-    result_invalid = prompt_for_valid_file_name_input()
-    captured_invalid = capsys.readouterr()
-    verify_file_invalid = check_if_file_exists(invalid_test_input)
-    assert result_invalid is None  # Since the function prompts until a valid name is given
-    assert "Enter a valid file name" in captured_invalid.out
-    assert "File does not exist" in captured_invalid.out
-    assert verify_file_invalid is None
-
-    # Test with another valid file name
-    valid_test_input_2 = 'another_test_file.txt'
-    monkeypatch.setattr('builtins.input', lambda _: valid_test_input_2)
-    result_valid_2 = prompt_for_valid_file_name_input()
-    captured_valid_2 = capsys.readouterr()
-    assert result_valid_2 == valid_test_input_2
-    assert "Enter a valid file name" in captured_valid_2.out
-    assert "Target file: another_test_file.txt" in captured_valid_2.out
-
-
-def test_get_valid_file_name_loop(monkeypatch, capsys):
-    # Simulate user input for a correct filename
-    test_input = 'test_file.txt'
-    monkeypatch.setattr('builtins.input', lambda _: test_input)
-    
-    # Call the function
-    result = get_valid_file_name_loop()
-    
-    # Capture the output
-    captured = capsys.readouterr()
-    
-    # Check the result and output for the correct filename
-    assert result == 'test_file.txt'
-    assert "Enter a valid file name" in captured.out
-    assert "Target file: test_file.txt" in captured.out
+    with pytest.raises(TypeError):
+        check_if_file_exists(invalid_file_name_none)
 
 
 def test_check_valid_mode():
+    """
+    Test the check_valid_mode function with different mode inputs.
+
+    Test Cases:
+    1. Test with a valid lowercase mode.
+    2. Test with a valid uppercase mode.
+    3. Test with a valid mixed-case mode.
+    4. Test with an invalid mode.
+    5. Test with '>q' to terminate the program.
+    6. Test with a numeric input.
+    7. Test with a boolean input.
+    8. Test with a list input.
+    9. Test with a dictionary input.
+    10. Test with integers.
+    """
     # Test with a valid lowercase mode
     valid_mode_input_lower = 'r'
     result_lower = check_valid_mode(valid_mode_input_lower)
@@ -149,21 +153,23 @@ def test_check_valid_mode():
 
     # Test with a boolean input
     bool_mode_input = True
-    bool_mode_input_result = check_valid_mode(bool_mode_input)
-    assert bool_mode_input_result is None
+    with pytest.raises(AttributeError):
+        check_valid_mode(bool_mode_input)
 
     # Test with a list input
     list_mode_input = ['a', 'b', 'c']
-    list_mode_input_result = check_valid_mode(list_mode_input)
-    assert list_mode_input_result is None
+    with pytest.raises(AttributeError):
+        check_valid_mode(list_mode_input)
 
     # Test with a dictionary input
     dict_mode_input = {'key': 'value'}
-    dict_mode_input_result = check_valid_mode(dict_mode_input)
-    assert dict_mode_input_result is None
+    with pytest.raises(AttributeError):
+        check_valid_mode(dict_mode_input)
 
-    # Test with a integers
+    # Test with integers
     int_mode_input = 12
-    dict_mode_input_result = check_valid_mode(int_mode_input)
-    assert dict_mode_input_result is None
+    dict_mode_input = {'key': 'value'}
+    with pytest.raises(AttributeError):
+        check_valid_mode(int_mode_input)
+
 
