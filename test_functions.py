@@ -129,7 +129,7 @@ def test_check_valid_mode():
 
     # Test with '>q' to terminate the program
     with pytest.raises(SystemExit):
-        check_valid_mode('>q')
+        check_valid_mode('>Q')
 
     # Test with a numeric input
     numeric_mode_input = '123'

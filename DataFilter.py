@@ -42,7 +42,7 @@ def get_mass_lower_limit() -> int:
     int: Lower limit for meteor mass.
     """
     lower_limit = input(f"Enter the LOWER limit (inclusive) for meteor's MASS (g) ('Q' to QUIT): ")
-    if lower_limit.lower() == "q":
+    if lower_limit == "Q":
         terminate_the_program()
     else:
         return int(lower_limit)
@@ -57,7 +57,7 @@ def get_mass_upper_limit() -> int:
     int: Upper limit for meteor mass.
     """
     upper_limit = input("Enter the UPPER limit (inclusive) for meteor's MASS (g) ('Q' to QUIT): ")
-    if upper_limit.lower() == "q":
+    if upper_limit == "Q":
         terminate_the_program()
     else:
         return int(upper_limit)
@@ -72,7 +72,7 @@ def get_year_lower_limit() -> int:
     int: Lower limit for meteor year.
     """
     year_lower_limit = input("Enter the LOWER limit (inclusive) for meteor's YEAR ('Q' to QUIT): ")
-    if year_lower_limit.lower() == "q":
+    if year_lower_limit == "Q":
         terminate_the_program()
     else:
         return int(year_lower_limit)
@@ -88,7 +88,7 @@ def get_year_upper_limit() -> int:
     """
 
     year_upper_limit = input("Enter the UPPER limit (inclusive) for meteor's YEAR ('Q' to QUIT): ")
-    if year_upper_limit.lower() == "q" :
+    if year_upper_limit == "Q" :
         terminate_the_program()
     else:
         return int(year_upper_limit)
@@ -168,7 +168,7 @@ def write_filtered_meteor_header_to_text_file(file: object) -> None:
     file.write(f"{name_label}{spacing} {id_label}{spacing}{name_type_label}{spacing}"
                f"{rec_class_label}{spacing}{mass_g_label}{spacing}{fall_label}{spacing}"
                f"{year_label}{spacing}{rec_lat_label}{spacing}{rec_long_label}{spacing}"
-               f" {geo_location_label}{spacing}{states_label}{spacing}{counties_label}")
+               f" {geo_location_label}{spacing}{states_label}{spacing}{counties_label}\n")
 
 
 def format_meteor_data_for_terminal(count:int, meteor:object)->None:

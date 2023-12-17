@@ -42,7 +42,7 @@ def print_file_opening_modes():
          (WARNING: this mode will delete the contents of an existing file!)
     "x" - open for exclusive creation, failing if the file already exists
     "a" - open for writing, appending to the end of the file if it exists
-    Enter ">q" or ">0" to quit """
+    Enter ">q" or ">Q" to quit """
     )
 
 

@@ -103,6 +103,7 @@ def write_filtered_mass_data_to_excel_file(meteor_list: list, limits: list) -> N
     save_workbook(wb, file_name)
 
 
+
 def filter_meteors_by_mass(meteor_list: list, limits: list) -> list[object]:
     """
     Filter meteor data by mass within the specified limits.
@@ -125,7 +126,6 @@ def write_filtered_year_data_to_excel_file(meteor_list: list, limits: list) ->No
         meteor_list (list): List of meteor objects.
         limits (list): List of year limits for filtering.
     """
-    print("year filter to Excel file")
     filtered_list = filter_meteors_by_year(meteor_list, limits)
 
     wb = create_excel_workbook()
@@ -137,7 +137,7 @@ def write_filtered_year_data_to_excel_file(meteor_list: list, limits: list) ->No
 
     write_data_rows(ws, filtered_list)
     current_datetime = datetime.datetime.now()
-    file_name = output_text_file_name(current_datetime)
+    file_name = output_text_file_name(current_datetime, '')
     save_workbook(wb, file_name)
 
 

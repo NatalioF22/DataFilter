@@ -58,7 +58,7 @@ def handle_year_filter_option_selection(meteor_list, limits):
     elif selected_output_option == 2:
         write_filtered_year_data_to_txt_file(meteor_list, limits)
     elif selected_output_option == 3:
-        write_filtered_year_data_to_excel_file(meteor_list, limits)  # Add logic for handling option 3
+        write_filtered_year_data_to_excel_file(meteor_list, limits)
     elif selected_output_option == 4:
         terminate_the_program()
     else:
@@ -79,10 +79,11 @@ def handle_mass_filter_option_selection(meteor_list, limits):
     elif selected_output_option == 2:
         write_filtered_mass_data_to_txt_file(meteor_list, limits)
     elif selected_output_option == 3:
-        filter_meteors_by_mass(meteor_list, limits)  # Add logic for handling option 3
+        write_filtered_mass_data_to_excel_file(meteor_list, limits)  # Add this line
     elif selected_output_option == 4:
         terminate_the_program()
-    else: print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
+    else:
+        print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
 
 
 def process_filtered_mass_data(file_name):

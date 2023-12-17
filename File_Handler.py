@@ -13,7 +13,7 @@ import os
 from meteorite_console_display import *
 
 
-def output_text_file_name(current_datetime: object, extension= ".txt") -> str:
+def output_text_file_name(current_datetime: object, extension = ".txt") -> str:
     """
     This method generates a formatted date string for use in creating output text file names.
 
@@ -95,7 +95,7 @@ def check_valid_mode(user_mode_input) -> str:
     Returns:
         str: Valid file mode.
     """
-    if user_mode_input.lower() == '>q':
+    if user_mode_input == '>Q':
         terminate_the_program()
     return user_mode_input.lower() if user_mode_input.lower() in ['r','w','a','x'] else None
 
