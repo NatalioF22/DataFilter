@@ -3,7 +3,7 @@
     Author: Natalio Gomes
     Class: COMP390
     Section: 002
-    Date: December 14th, 2023
+    Date: December 18th, 2023
     Functionality: This module provides error handling functionalities, including handling KeyboardInterrupt and ValueError.
 """
 

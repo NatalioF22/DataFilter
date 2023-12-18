@@ -3,7 +3,7 @@
     Author: Natalio Gomes
     Class: COMP390
     Section: 002
-    Date: December 14th, 2023
+    Date: December 18th, 2023
     Functionality: This file contains functions for handling and filtering meteor data. It provides functionality to
                prompt the user for filtering choices, get input for mass and year limits, extract meteor data from
                a file, create MeteorDataEntry objects, display and write headers, and format and print filtered

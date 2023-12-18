@@ -3,7 +3,7 @@ Project 1.2
 Author: Natalio Gomes
 Class: COMP390
 Section: 002
-Date: December 3rd, 2023
+Date: December 18th, 2023
 Functionality: This script serves as the main entry point for Project 1.2, allowing the user to filter and process
                meteor data based on mass or year. It utilizes functions from the DataFilter module to handle
                filtering and output options, providing a user-friendly interface for interacting with the meteor data.
@@ -36,12 +36,13 @@ def get_integer_input():
     Returns:
     int: User-entered integer.
     """
-    print("integer input")
+
     try:
         user_input = int(input(">> "))
         return user_input
     except ValueError:
-        print("\nPlease enter an integer.")
+        print(TerminalColors.RED + "Please enter an integer." + TerminalColors.RESET)
+        print_the_output_option()
 
 
 def handle_year_filter_option_selection(meteor_list, limits):

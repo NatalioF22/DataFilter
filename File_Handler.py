@@ -3,7 +3,7 @@
     Author: Natalio Gomes
     Class: COMP390
     Section: 002
-    Date: December 14th, 2023
+    Date: December 18th, 2023
 
     File Handler File
     This module provides utility functions for file handling, including file opening modes, 
@@ -95,7 +95,7 @@ def check_valid_mode(user_mode_input) -> str:
     Returns:
         str: Valid file mode.
     """
-    if user_mode_input == '>Q':
+    if user_mode_input.lower() == '>q':
         terminate_the_program()
     return user_mode_input.lower() if user_mode_input.lower() in ['r','w','a','x'] else None
 
