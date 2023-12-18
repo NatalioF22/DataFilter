@@ -13,7 +13,7 @@ import os
 from meteorite_console_display import *
 
 
-def output_text_file_name(current_datetime: object, extension = ".txt") -> str:
+def output_text_file_name(current_datetime: object, extension=".txt") -> str:
     """
     This method generates a formatted date string for use in creating output text file names.
 
@@ -28,7 +28,7 @@ def output_text_file_name(current_datetime: object, extension = ".txt") -> str:
     return f"{formatted_date_string}{extension}"
 
 
-def check_if_file_exists(file_name: str) -> bool:
+def check_if_file_exists(file_name: str) -> bool or None:
     """
     Check if the specified file exists.
 
@@ -45,7 +45,7 @@ def check_if_file_exists(file_name: str) -> bool:
         print(TerminalColors.RED + f"\nERROR: TARGET FILE NAME: '{file_name}' IS NOT VALID!\n" + TerminalColors.RESET)
     
 
-def prompt_for_valid_file_name_input() -> str:
+def prompt_for_valid_file_name_input() -> str or SystemExit:
     """
     Prompt the user for a valid file name input.
 
@@ -85,7 +85,7 @@ def prompt_for_file_name() -> str:
     return result 
 
 
-def check_valid_mode(user_mode_input) -> str:
+def check_valid_mode(user_mode_input) -> str or SystemExit:
     """
     Check if the specified file mode input is valid.
 
@@ -162,7 +162,7 @@ def open_file_in_append_mode(file_name: str) -> object:
     return file_obj
 
         
-def open_file_in_exclusive_mode(file_name: str) -> object:
+def open_file_in_exclusive_mode(file_name: str) -> object or SystemExit:
     """
     Open a file in exclusive mode.
 

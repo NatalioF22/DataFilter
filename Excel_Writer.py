@@ -25,7 +25,7 @@ def create_excel_workbook() -> object:
     return Workbook()
 
 
-def add_worksheet_to_workbook(workbook:object, sheet_name: object) -> object:
+def add_worksheet_to_workbook(workbook: object, sheet_name: object) -> object:
     """
     Add a new worksheet to the Excel workbook.
 
@@ -118,7 +118,7 @@ def filter_meteors_by_mass(meteor_list: list, limits: list) -> list[object]:
     return [meteor for meteor in meteor_list if limits[0] <= meteor.get_mass() <= limits[1]]
 
 
-def write_filtered_year_data_to_excel_file(meteor_list: list, limits: list) ->None:
+def write_filtered_year_data_to_excel_file(meteor_list: list, limits: list) -> None:
     """
     Write filtered meteor data based on year to an Excel file.
 

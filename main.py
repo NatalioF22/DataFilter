@@ -29,7 +29,7 @@ def get_valid_integer_input_with_retry(func):
     return result
 
 
-def get_integer_input():
+def get_integer_input() -> int or SystemExit:
     """
     Gets integer input from the user.
 
@@ -45,7 +45,7 @@ def get_integer_input():
         print_the_output_option()
 
 
-def handle_year_filter_option_selection(meteor_list, limits):
+def handle_year_filter_option_selection(meteor_list: list[object], limits: list[int]) -> None:
     """
     Handles the user's selection for year filtering options.
 
@@ -66,7 +66,7 @@ def handle_year_filter_option_selection(meteor_list, limits):
         print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
 
 
-def handle_mass_filter_option_selection(meteor_list, limits):
+def handle_mass_filter_option_selection(meteor_list: list[object], limits: list[int]) -> None:
     """
     Handles the user's selection for mass filtering options.
 
@@ -87,7 +87,7 @@ def handle_mass_filter_option_selection(meteor_list, limits):
         print(TerminalColors.RED + "INVALID CHOICE" + TerminalColors.RESET)
 
 
-def process_filtered_mass_data(file_name):
+def process_filtered_mass_data(file_name: str) -> None:
     """
     Processes and filters meteor data based on mass.
 
@@ -101,7 +101,7 @@ def process_filtered_mass_data(file_name):
     handle_mass_filter_option_selection(meteor_list, limits)
 
 
-def process_filtered_year_data(file_name):
+def process_filtered_year_data(file_name: str) -> None:
     """
     Processes and filters meteor data based on year.
 
@@ -115,7 +115,7 @@ def process_filtered_year_data(file_name):
     handle_year_filter_option_selection(meteor_list, limits)
 
 
-def process_user_choice(user_choice, file_name):
+def process_user_choice(user_choice: int, file_name: str) -> None or SystemExit:
     """
     Processes the user's choice for filtering meteor data.
 

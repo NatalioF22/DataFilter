@@ -8,7 +8,7 @@
 from ColoredText import TerminalColors
 
 
-def print_welcome_message():
+def print_welcome_message() -> None:
     """
     Print a welcome message for the Meteorite Filtering Application.
 
@@ -32,7 +32,7 @@ def print_welcome_message():
           "\tDecember 2023\n")
     
 
-def print_file_opening_modes():
+def print_file_opening_modes() -> None:
     
     print(
         """
@@ -46,7 +46,7 @@ def print_file_opening_modes():
     )
 
 
-def print_filter_menu_options():
+def print_filter_menu_options() -> None:
     print("What attribute would you like to filter the data on?")
     print("1. Meteor MASS(g)")
     print("2. The YEAR the meteor fell to earth")
@@ -58,7 +58,7 @@ def terminate_the_program() -> exit:
     exit()
 
 
-def print_the_output_option():
+def print_the_output_option() -> None:
     print("How would you like to output the filter results?")
     print("1. On Screen (in terminal)")
     print("2. To a TEXT file")
