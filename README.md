@@ -1,4 +1,4 @@
-# [COMP390_Individual_Project1.2](https://github.com/NatalioF22/DataFilter)
+# DataFilter
 
 ## Author: Natalio Gomes
 
@@ -13,7 +13,7 @@ output options. The project includes error handling functionalities, ensuring a 
 To test the script, follow these steps:
 
 1. **Clone the Repository:**
-   git clone https://github.com/NatalioF22/COMP390_Individual_Project1.2.git
+   git clone git@github.com:NatalioF22/DataFilter.git
    cd COMP390_Individual_Project1.2
 
 2. **Run the Script:**
