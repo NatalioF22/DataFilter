@@ -1,4 +1,4 @@
-# COMP390_Individual_Project1.2
+# [COMP390_Individual_Project1.2](https://github.com/NatalioF22/DataFilter)
 
 ## Author: Natalio Gomes
 
